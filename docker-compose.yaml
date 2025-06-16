@@ -1,0 +1,28 @@
+services:
+  mysql:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: "admin"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "admin"
+      MYSQL_DATABASE: "database"
+    healthcheck:
+        test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+        start_period: 5s
+        interval: 5s
+        timeout: 10s
+        retries: 20
+    ports:
+      - 3306:3306
+    volumes:
+      - ./dump/:/docker-entrypoint-initdb.d/
+    networks:
+      - localdev
+
+networks:
+  localdev:
+    name: localdev_net
+    driver: bridge
