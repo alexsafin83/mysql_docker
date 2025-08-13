@@ -2,7 +2,6 @@
 Best docker set up for MySQL out there
 
 ## 1. What you will get
-You will get
 - mysql 8.4
 - a docker network `localdev`
 - mysql data persistence
