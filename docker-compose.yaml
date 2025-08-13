@@ -19,6 +19,7 @@ services:
       - 3306:3306
     volumes:
       - ./dump/:/docker-entrypoint-initdb.d/
+      - mysql_db_persistence:/var/lib/mysql
     networks:
       - localdev
 
@@ -26,3 +27,6 @@ networks:
   localdev:
     name: localdev_net
     driver: bridge
+
+volumes:
+  mysql_db_persistence:
